@@ -85,6 +85,6 @@ IPs:
 
 
 
-## References
+## License
 
-Apache-2.0 © Rsa7an
+Apache License 2.0.  © Rsa7an
