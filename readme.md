@@ -1,6 +1,6 @@
 # SSL Certificate IP Extractor
 
-This Python script is designed to help users extract IP addresses associated with a specific SSL certificate serial number. By utilizing socket connections and SSL/TLS handshakes, the script is able to retrieve the certificate's serial number and uses the  [FOFA](https://fofa.info) search engine to query for all IP addresses that share the same certificate serial number.
+This Python script is designed to help users extract IP addresses associated with a specific SSL certificate serial number. By utilizing socket connections and SSL/TLS handshakes, the script is able to retrieve the certificate's serial number and uses the [FOFA](https://fofa.info) search engine to query for all IP addresses that share the same certificate serial number.
 
 
 
@@ -38,7 +38,7 @@ This Python script is designed to help users extract IP addresses associated wit
 Run the script using the command-line interface:
 
 ```bash
-python CertIPs.py [domain] [--port PORT] [--timeout TIMEOUT]
+python main.py [domain] [--port PORT] [--timeout TIMEOUT]
 ```
 
 - `domain`: The domain to query for SSL certificate IPs.
@@ -52,16 +52,17 @@ python CertIPs.py [domain] [--port PORT] [--timeout TIMEOUT]
 ## Example
 
 ```bash
-python CertIPs.py www.baidu.com --port 443 --timeout 15000
+python main.py www.baidu.com --port 443 --timeout 15000
 
-   ____                      __       ______      ____     ____       
-  /\  _`\                   /\ \__   /\__  _\    /\  _`\  /\  _`\     
-  \ \ \/\_\     __    _ __  \ \ ,_\  \/_/\ \/    \ \ \L\ \\ \,\L\_\   
-   \ \ \/_/_  /'__`\ /\`'__\ \ \ \/     \ \ \     \ \ ,__/ \/_\__ \   
-    \ \ \L\ \/\  __/ \ \ \/   \ \ \_     \_\ \__   \ \ \/    /\ \L\ \ 
-     \ \____/\ \____\ \ \_\    \ \__\    /\_____\   \ \_\    \ `\____\
-      \/___/  \/____/  \/_/     \/__/    \/_____/    \/_/     \/_____/
-                                                                                                                                                                                                                                                                           
+   ____    ____    __             ______  ____    _____                                      
+  /\  _`\ /\  _`\ /\ \           /\__  _\/\  _`\ /\  __`\                                    
+  \ \,\L\_\ \,\L\_\ \ \          \/_/\ \/\ \ \L\ \ \ \/\ \  __  __     __   _ __   __  __    
+   \/_\__ \\/_\__ \\ \ \  __  ______\ \ \ \ \ ,__/\ \ \ \ \/\ \/\ \  /'__`\/\`'__\/\ \/\ \   
+     /\ \L\ \/\ \L\ \ \ \L\ \/\______\_\ \_\ \ \/  \ \ \\'\\ \ \_\ \/\  __/\ \ \/ \ \ \_\ \  
+     \ `\____\ `\____\ \____/\/______/\_____\ \_\   \ \___\_\ \____/\ \____\\ \_\  \/`____ \ 
+      \/_____/\/_____/\/___/         \/_____/\/_/    \/__//_/\/___/  \/____/ \/_/   `/___/> \
+                                                                                       /\___/
+                                                                                       \/__/                                                                      
 Author: Rsa7an
 
 Domain:
@@ -71,16 +72,15 @@ Cert Serial:
 - 26585094245224241434632730821
 
 IPs:
-- 183.232.231.201
-- 112.80.255.43
-- 124.237.176.143
-- 103.211.221.12
-- 220.181.112.72
-- 110.185.186.49
-- 182.61.248.47
-- 182.61.200.142
-- 112.80.255.214
-- 182.61.200.83
+- 124.237.208.70
+- 221.204.49.47
+- 124.237.208.40
+- 157.0.148.19
+- 39.177.47.142
+- 110.242.68.236
+- 106.12.1.190
+- 124.237.208.104
+- 223.109.81.161
 ```
 
 
