@@ -1,6 +1,6 @@
 # SSL Certificate IP Extractor
 
-This Python script is designed to help users extract IP addresses associated with a specific SSL certificate serial number. By utilizing socket connections and SSL/TLS handshakes, the script is able to retrieve the certificate's serial number and uses the FOFA search engine to query for all IP addresses that share the same certificate serial number.
+This Python script is designed to help users extract IP addresses associated with a specific SSL certificate serial number. By utilizing socket connections and SSL/TLS handshakes, the script is able to retrieve the certificate's serial number and uses the  [FOFA](https://fofa.info) search engine to query for all IP addresses that share the same certificate serial number.
 
 
 
