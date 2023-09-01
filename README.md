@@ -60,7 +60,7 @@ python main.py [domain] [--port PORT] [--timeout TIMEOUT] [--file FILE] [--outpu
 You can query SSL certificate information for a single domain as follows:
 
 ```bash
-python main.py www.baidu.com --port 443 --timeout 15000
+python main.py example.com --port 443 --timeout 15000
 ```
 
 The output will look like this:
@@ -78,21 +78,21 @@ The output will look like this:
 Author: Rsa7an
 
 Domain:
-- www.baidu.com
+- example.com
 
 Cert Serial:
-- 26585094245224241434632730821
+- 16115816404043435608139631424403370993
 
 IPs:
-- 124.237.208.70
-- 221.204.49.47
-- 124.237.208.40
-- 157.0.148.19
-- 39.177.47.142
-- 110.242.68.236
-- 106.12.1.190
-- 124.237.208.104
-- 223.109.81.161
+- 68.232.45.14
+- 68.232.44.115
+- 192.210.190.104
+- 68.232.35.34
+- 68.232.34.14
+- 116.196.84.120
+- 93.184.215.14
+- 67.225.138.85
+- 164.90.215.163
 ```
 
 This example demonstrates how to query SSL certificate information for a single domain, providing optional parameters for port and timeout.
