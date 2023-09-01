@@ -1,4 +1,3 @@
-import sys
 import re
 import random
 import socket
@@ -61,28 +60,78 @@ def get_cert_ips(domain, port=443, timeout=10000):
         return {"serial": serial, "ips": list(ips)}
     except Exception as e:
         raise e
+    
+def get_cert_ips_from_file(file_path):
+    try:
+        with open(file_path, "r") as file:
+            lines = file.readlines()
+        
+        results = []
+        for line in lines:
+            parts = line.strip().split(":")
+            domain = parts[0]
+            port = int(parts[1]) if len(parts) > 1 else 443
+            result = get_cert_ips(domain, port)
+            results.append({"domain": domain, "serial": result['serial'], "ips": result['ips']})
+        
+        return results
+    except Exception as e:
+        raise e
+
+def save_results_to_file(results, output_file):
+    try:
+        with open(output_file, "w") as file:
+            for result in results:
+                file.write("\nDomain:\n")
+                file.write(f"- {result['domain']}\n")
+                file.write("\nCert Serial:\n")
+                file.write(f"- {result['serial']}\n")
+                file.write("\nIPs:\n")
+                for ip in result['ips']:
+                    file.write(f"- {ip}\n")
+    except Exception as e:
+        raise e
 
 if __name__ == "__main__":
     import argparse
     print_logo()
     try:
-        # 解析命令行参数
         parser = argparse.ArgumentParser(description="Get IPs from SSL certificate serial number")
         parser.add_argument("domain", type=str, nargs="?", help="domain to query")
         parser.add_argument("--port", "-p", type=int, default=443, help="Port number (Default: 443)")
         parser.add_argument("--timeout", "-t", type=int, default=10000, help="Timeout milliseconds (Default: 10000)")
+        parser.add_argument("--file", "-f", type=str, help="Path to file containing domains and ports")
+        parser.add_argument("--output", "-o", type=str, help="Path to output file")
         args = parser.parse_args()
 
-        if args.domain:
+        if args.file:
+            results = get_cert_ips_from_file(args.file)
+            if args.output:
+                save_results_to_file(results, args.output)
+            else:
+                for result in results:
+                    print_colored("\nDomain:")
+                    print(f"- {result['domain']}")
+                    print_colored("\nCert Serial:")
+                    print(f"- {result['serial']}")
+                    print_colored("\nIPs:")
+                    for ip in result['ips']:
+                        print(f"- {ip}")
+        elif args.domain:
             result = get_cert_ips(args.domain, args.port, args.timeout)
-            print_colored("\nDomain:")
-            print(f"- {args.domain}")
-            print_colored("\nCert Serial:")
-            print(f"- {result['serial']}")
-            print_colored("\nIPs:")
-            for ip in result['ips']:
-                print(f"- {ip}")
+            if args.output:
+                save_results_to_file([result], args.output)
+            else:
+                print_colored("\nDomain:")
+                print(f"- {args.domain}")
+                print_colored("\nCert Serial:")
+                print(f"- {result['serial']}")
+                print_colored("\nIPs:")
+                for ip in result['ips']:
+                    print(f"- {ip}")
     except SystemExit:
         pass
     except Exception as e:
         print(f"Error: {e}")
+
+
