@@ -66,6 +66,7 @@ def get_cert_ips_from_file(file_path):
         with open(file_path, "r") as file:
             lines = file.readlines()
         
+        print(f"\nFound {len(lines)} domains")
         results = []
         for line in lines:
             parts = line.strip().split(":")
