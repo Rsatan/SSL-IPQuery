@@ -17,15 +17,12 @@ def print_colored(text):
 
 def print_logo():
     logo = r'''
-   ____    ____    __             ______  ____    _____                                      
-  /\  _`\ /\  _`\ /\ \           /\__  _\/\  _`\ /\  __`\                                    
-  \ \,\L\_\ \,\L\_\ \ \          \/_/\ \/\ \ \L\ \ \ \/\ \  __  __     __   _ __   __  __    
-   \/_\__ \\/_\__ \\ \ \  __  ______\ \ \ \ \ ,__/\ \ \ \ \/\ \/\ \  /'__`\/\`'__\/\ \/\ \   
-     /\ \L\ \/\ \L\ \ \ \L\ \/\______\_\ \_\ \ \/  \ \ \\'\\ \ \_\ \/\  __/\ \ \/ \ \ \_\ \  
-     \ `\____\ `\____\ \____/\/______/\_____\ \_\   \ \___\_\ \____/\ \____\\ \_\  \/`____ \ 
-      \/_____/\/_____/\/___/         \/_____/\/_/    \/__//_/\/___/  \/____/ \/_/   `/___/> \
-                                                                                       /\___/
-                                                                                       \/__/                                                                                                                                                                                                                                                                                                                    
+       __________ __         ________  ____                       
+      / ___/ ___// /        /  _/ __ \/ __ \__  _____  _______  __
+      \__ \\__ \/ /  ______ / // /_/ / / / / / / / _ \/ ___/ / / /
+     ___/ /__/ / /__/_____// // ____/ /_/ / /_/ /  __/ /  / /_/ / 
+    /____/____/_____/    /___/_/    \___\_\__,_/\___/_/   \__, /  
+                                                         /____/                                                                                                                                                                                                                                                                                                                    
     '''
     author = "Author: Rsa7an"
     
@@ -55,8 +52,7 @@ def get_cert_ips(domain, port=443, timeout=10000):
         response = requests.get("https://fofa.info/result", params={"qbase64": base64.b64encode(f"cert='{serial}'".encode()).decode()})
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
-        ips = set(text for text in [a.text for a in soup.select('.hsxa-meta-data-list-main-left a')] if re.match(r'^\d+\.\d+\.\d+\.\d+$', text))
-
+        ips = set([a.text.strip() for a in soup.select('.hsxa-meta-data-list-main-left a') if re.match(r"^\d+\.\d+\.\d+\.\d+$", a.text.strip())])
         return {"serial": serial, "ips": list(ips)}
     except Exception as e:
         raise e
@@ -127,9 +123,11 @@ if __name__ == "__main__":
                 print(f"- {args.domain}")
                 print_colored("\nCert Serial:")
                 print(f"- {result['serial']}")
-                print_colored("\nIPs:")
-                for ip in result['ips']:
-                    print(f"- {ip}")
+                print(f"\nFound {len(result['ips'])} IPs")
+                if len(result['ips']) > 0:
+                    print_colored("IPs:")
+                    for ip in result['ips']:
+                        print(f"- {ip}")
     except SystemExit:
         pass
     except Exception as e:
